@@ -8,3 +8,7 @@
     mode: "0755"
     url: "{{ borgbackup_download_url }}"
   tags: borginstall
+  when: (borgbackup_from_web == true) or (ansible_os_family != 'Debian')
+
+- include_tasks: setup-Debian.yml
+  when: (borgbackup_from_web == false) and (ansible_os_family == 'Debian')
